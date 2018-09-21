@@ -17,19 +17,26 @@ namespace Koch
             InitializeComponent();
         }
 
-        static Pen pen1;
-        static Graphics g;
-        static Pen pen2;
+       
+        static Graphics g;        
+        static Pen pen3, pen1, pen2;
 
         PointF point1 = new PointF(240, 160);
         PointF point2 = new PointF(720, 160);
         PointF point3 = new PointF(480, 480);
 
-        
+        /// <summary>
+        /// Построение фрактала
+        /// </summary>
+        /// <param name="p1">Первая точка</param>
+        /// <param name="p2">Вторая точка</param>
+        /// <param name="p3">3 точка для координации</param>
+        /// <param name="lvl">Колличество итераций</param>
+        /// <returns></returns>
         static int Fractal (PointF p1, PointF p2, PointF p3, int lvl)
         {
-            //n -количество итераций
-            if (lvl > 0)  //условие выхода из рекурсии
+            
+            if (lvl > 0)
             {
                 //средняя треть отрезка
                 var p4 = new PointF((p2.X + 2 * p1.X) / 3, (p2.Y + 2 * p1.Y) / 3);
@@ -39,8 +46,8 @@ namespace Koch
                 var pn = new PointF((4 * ps.X - p3.X) / 3, (4 * ps.Y - p3.Y) / 3);
                 //рисуем его
                 g.DrawLine(pen1, p4, pn);
-                g.DrawLine(pen1, p5, pn);
-                g.DrawLine(pen2, p4, p5);
+                g.DrawLine(pen2, p5, pn);
+                g.DrawLine(pen3, p4, p5);
 
 
                 //рекурсивно вызываем функцию нужное число раз
@@ -75,8 +82,9 @@ namespace Koch
 
         private void SetPens ()
         {
-            pen1 = new Pen(Color.Red, 1);
+            pen1 = new Pen(Color.Blue, 1);
             pen2 = new Pen(Color.Yellow, 1);
+            pen3 = new Pen(Color.Red, 1);
         }
 
         private void ClearPicBox()
